@@ -1,9 +1,9 @@
-package algorithm.tx.second;
+package algorithm.tx.building;
 
 import java.util.Scanner;
 import java.util.Stack;
 
-public class SecondTwo {
+public class Main {
 	private static void solve(int n, int[] arr) {
 		int[] rightLook = new int[n];
 		Stack<Integer> stack = new Stack<>();

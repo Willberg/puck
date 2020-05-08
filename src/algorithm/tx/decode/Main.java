@@ -1,10 +1,10 @@
-package algorithm.tx.first;
+package algorithm.tx.decode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class First {
+public class Main {
 	public static String solve2(String inputStr) {
 		StringBuilder retBuilder = new StringBuilder();
 		List<String> inputList = solve(inputStr);

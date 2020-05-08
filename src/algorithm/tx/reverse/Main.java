@@ -1,4 +1,4 @@
-package algorithm.tx.third;
+package algorithm.tx.reverse;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Third {
+public class Main {
 	private static void solve(int n, Integer[] nArr, int m, Integer[] mArr) {
 		List<Integer> l = new LinkedList<>();
 

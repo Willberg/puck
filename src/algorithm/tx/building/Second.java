@@ -1,4 +1,4 @@
-package algorithm.tx.second;
+package algorithm.tx.building;
 
 import java.util.*;
 
