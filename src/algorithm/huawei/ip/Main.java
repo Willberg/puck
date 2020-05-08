@@ -39,10 +39,10 @@ public class Main {
 		List<String> inputList = new ArrayList<>();
 		String inputStr = input.nextLine();
 		while (inputStr != null && !inputStr.equals("")) {
-//			inputList.add(inputStr);
-			System.out.println(inputStr);
-			inputStr = input.nextLine();
-			System.out.println(inputStr);
+			inputList.add(inputStr);
+			if(!input.hasNextLine()) {
+				break;
+			}
 		}
 		System.out.println(inputStr);
 		solve(inputList);
