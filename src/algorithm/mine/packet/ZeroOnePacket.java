@@ -15,6 +15,8 @@ public class ZeroOnePacket {
     private static int[][] dp = null;
     private static int[] item = null;
 
+    private static int[] dp2 = null;
+
     private static int[][] calValue(int[] w, int[] v, int c) {
         int[][] dp = new int[w.length][c + 1];
         for (int i = 1; i <= w.length - 1; i++) {
@@ -41,16 +43,8 @@ public class ZeroOnePacket {
         }
     }
 
-
-    private static int calValueImproveSpace(int[] w, int[] v, int c) {
-        int total = 0;
-        for (int i = 0; i < c; i++) {
-
-        }
-        return total;
-    }
-
-    public static void main(String[] args) {
+    // 未压缩空间
+    private static void solve1() {
         int[] w = {0, 2, 4, 3, 5};
         int[] v = {0, 3, 5, 4, 6};
         int c = 8;
@@ -73,5 +67,34 @@ public class ZeroOnePacket {
         for (int i : item) {
             System.out.print(i + " ");
         }
+        System.out.println("\n");
+    }
+
+
+    private static int[] calValueImproveSpace(int[] w, int[] v, int c) {
+        int[] dp = new int[c + 1];
+        for (int i = 1; i <= w.length - 1; i++) {
+            for (int j = c; j >= 0; j--) {
+                if (j >= w[i]) {
+                    dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+                }
+            }
+        }
+        return dp;
+    }
+
+    // 压缩空间
+    private static void solve2() {
+        int[] w = {0, 2, 4, 3, 5};
+        int[] v = {0, 3, 5, 4, 6};
+        int c = 8;
+        dp2 = calValueImproveSpace(w, v, c);
+        int total = dp2[c];
+        System.out.println("total: " + total);
+    }
+
+    public static void main(String[] args) {
+        solve1();
+        solve2();
     }
 }
