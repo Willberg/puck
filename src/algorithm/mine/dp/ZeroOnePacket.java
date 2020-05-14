@@ -1,4 +1,4 @@
-package algorithm.mine.packet;
+package algorithm.mine.dp;
 
 /**
  * @author john
