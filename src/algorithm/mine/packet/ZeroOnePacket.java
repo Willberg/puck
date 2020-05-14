@@ -16,6 +16,7 @@ public class ZeroOnePacket {
     private static int[] item = null;
 
     private static int[] dp2 = null;
+    private static int[] item2 = null;
 
     private static int[][] calValue(int[] w, int[] v, int c) {
         int[][] dp = new int[w.length][c + 1];
@@ -83,6 +84,18 @@ public class ZeroOnePacket {
         return dp;
     }
 
+    private static void findWhat2(int i, int j, int[] w, int[] v) {
+        if (i >= 1) {
+            if (j - w[i] >= 0 && dp2[j] == dp2[j - w[i]] + v[i]) {
+                item2[i] = 1;
+                findWhat2(i - 1, j - w[i], w, v);
+            } else {
+                item2[i] = 0;
+                findWhat2(i - 1, j, w, v);
+            }
+        }
+    }
+
     // 压缩空间
     private static void solve2() {
         int[] w = {0, 2, 4, 3, 5};
@@ -91,6 +104,21 @@ public class ZeroOnePacket {
         dp2 = calValueImproveSpace(w, v, c);
         int total = dp2[c];
         System.out.println("total: " + total);
+
+        System.out.println("table: ");
+        for (int i = 0; i < c + 1; i++) {
+            System.out.print(dp2[i] + " ");
+        }
+        System.out.println("");
+
+        // 找出解
+        System.out.println("bags: ");
+        item2 = new int[w.length];
+        findWhat2(w.length - 1, c, w, v);
+        for (int i : item2) {
+            System.out.print(i + " ");
+        }
+        System.out.println("\n");
     }
 
     public static void main(String[] args) {
