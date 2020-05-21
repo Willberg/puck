@@ -66,15 +66,15 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		while (input.hasNextLine()) {
-			int n = Integer.valueOf(input.nextLine());
+			int n = Integer.parseInt(input.nextLine());
 			String inputLine = input.nextLine();
-			List<Integer> list = Arrays.stream(inputLine.split(" ")).map(v -> Integer.valueOf(v)).collect(Collectors.toList());
-			Integer[] nArr = list.toArray(new Integer[list.size()]);
+			List<Integer> list = Arrays.stream(inputLine.split(" ")).map(Integer::valueOf).collect(Collectors.toList());
+			Integer[] nArr = list.toArray(new Integer[0]);
 
-			int m = Integer.valueOf(input.nextLine());
+			int m = Integer.parseInt(input.nextLine());
 			inputLine = input.nextLine();
-			list = Arrays.stream(inputLine.split(" ")).map(v -> Integer.valueOf(v)).collect(Collectors.toList());
-			Integer[] mArr = list.toArray(new Integer[list.size()]);
+			list = Arrays.stream(inputLine.split(" ")).map(Integer::valueOf).collect(Collectors.toList());
+			Integer[] mArr = list.toArray(new Integer[0]);
 			solve(n, nArr, m, mArr);
 		}
 
