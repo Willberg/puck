@@ -7,13 +7,17 @@ package pattern.singleton.hungry;
  **/
 public class Singleton {
 
-	private static Singleton instance = new Singleton();
+    private static Singleton instance = new Singleton();
 
-	public static Singleton getInstance() {
-		return instance;
-	}
+    private Singleton() {
 
-	public static void main(String[] args) {
-		Singleton.getInstance();
-	}
+    }
+
+    public static Singleton getInstance() {
+        return instance;
+    }
+
+    public static void main(String[] args) {
+        Singleton.getInstance();
+    }
 }

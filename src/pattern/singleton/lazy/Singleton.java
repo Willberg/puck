@@ -6,24 +6,27 @@ package pattern.singleton.lazy;
  * @Date 2020/4/2 2:09 PM
  **/
 public class Singleton {
-	private static Singleton instance;
+    private static Singleton instance;
 
+    private Singleton() {
 
-	/**
-	 * @Author John
-	 * @Description 初次调用该方法时，实例化
-	 * @Date 2020/4/2 1:58 PM
-	 * @Param
-	 * @return
-	 **/
-	public static Singleton getInstance() {
-		if (instance == null) {
-			instance = new Singleton();
-		}
-		return instance;
-	}
+    }
 
-	public static void main(String[] args) {
-		Singleton.getInstance();
-	}
+    /**
+     * @return
+     * @Author John
+     * @Description 初次调用该方法时，实例化
+     * @Date 2020/4/2 1:58 PM
+     * @Param
+     **/
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    public static void main(String[] args) {
+        Singleton.getInstance();
+    }
 }
