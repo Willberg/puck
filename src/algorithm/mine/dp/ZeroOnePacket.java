@@ -12,159 +12,99 @@ package algorithm.mine.dp;
  * 可以压缩空间，f[v]=max{f[v],f[v-w[i]]+v[i]}
  */
 public class ZeroOnePacket {
-    private static int[][] dp = null;
-    private static int[] item = null;
+	private static int[][] dp = null;
+	private static int[] item = null;
 
-    private static int[] dp2 = null;
-    private static int[] item2 = null;
+	private static int[] dp2 = null;
+	private static int[] item2 = null;
+	private static int globalC = 18;
 
-    private static int[][] calValue(int[] w, int[] v, int c) {
-        int[][] dp = new int[w.length][c + 1];
-        for (int i = 1; i <= w.length - 1; i++) {
-            for (int j = 1; j <= c; j++) {
-                if (j < w[i]) {
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
-                }
-            }
-        }
-        return dp;
-    }
+	private static int[][] calValue(int[] w, int[] v, int c) {
+		int[][] dp = new int[w.length][c + 1];
+		for (int i = 1; i <= w.length - 1; i++) {
+			for (int j = 1; j <= c; j++) {
+				if (j < w[i]) {
+					dp[i][j] = dp[i - 1][j];
+				} else {
+					dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
+				}
+			}
+		}
+		return dp;
+	}
 
-    private static void findWhat(int i, int j, int[] w, int[] v) {
-        if (i >= 1) {
-            if (dp[i][j] == dp[i - 1][j]) {
-                item[i] = 0;
-                findWhat(i - 1, j, w, v);
-            } else if (j - w[i] >= 0 && dp[i][j] == dp[i - 1][j - w[i]] + v[i]) {
-                item[i] = 1;
-                findWhat(i - 1, j - w[i], w, v);
-            }
-        }
-    }
+	// 未压缩空间
+	private static void solve1() {
+		int[] w = {0, 2, 4, 3, 5};
+		int[] v = {0, 3, 5, 4, 6};
+		int c = globalC;
+		dp = calValue(w, v, c);
+		int total = dp[w.length - 1][c];
+		System.out.println("total: " + total);
 
-    // 未压缩空间
-    private static void solve1() {
-        int[] w = {0, 2, 4, 3, 5};
-        int[] v = {0, 3, 5, 4, 6};
-        int c = 8;
-        dp = calValue(w, v, c);
-        int total = dp[w.length - 1][c];
-        System.out.println("total: " + total);
+		System.out.println("table: ");
+		for (int i = 0; i < w.length; i++) {
+			for (int j = 0; j < c + 1; j++) {
+//                System.out.print("%5d",dp[i][j]);
+				System.out.format("%5d", dp[i][j]);
+			}
+			System.out.println("");
+		}
 
-        System.out.println("table: ");
-        for (int i = 0; i < w.length; i++) {
-            for (int j = 0; j < c + 1; j++) {
-                System.out.print(dp[i][j] + " ");
-            }
-            System.out.println("");
-        }
-
-        // 找出解
-        System.out.println("bags: ");
-        item = new int[w.length];
-        findWhat(w.length - 1, c, w, v);
-        for (int i : item) {
-            System.out.print(i + " ");
-        }
-        System.out.println("\n");
-    }
+		// 找出解
+		System.out.println("bags: ");
+		item = new int[w.length];
+		findWhat(w.length - 1, c, w, v);
+		for (int i : item) {
+			System.out.print(i + " ");
+		}
+		System.out.println("\n");
+	}
 
 
-    private static int[] calValueImproveSpace(int[] w, int[] v, int c) {
-        int[] dp = new int[c + 1];
-        for (int i = 1; i <= w.length - 1; i++) {
-            for (int j = c; j >= 0; j--) {
-                if (j >= w[i]) {
-                    dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
-                }
-            }
-        }
-        return dp;
-    }
+	private static int[] calValueImproveSpace(int[] w, int[] v, int c) {
+		int[] dp = new int[c + 1];
+		for (int i = 1; i <= w.length - 1; i++) {
+			for (int j = c; j >= 0; j--) {
+				if (j >= w[i]) {
+					dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+				}
+			}
+		}
+		return dp;
+	}
 
-    private static int[] calValueImproveSpace2(int[] w, int[] v, int c, int[] item) {
-        int[] dp = new int[c + 1];
-        for (int i = 0; i <= w.length - 1; i++) {
-            for (int j = c; j >= 0; j--) {
-                if (j >= w[i]) {
-                    dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
-                    int m = Math.max(dp[j], dp[j - w[i]] + v[i]);
-                    if (dp[j] == m) {
-                        item[i] = 1;
-                    }
-                }
-            }
-        }
-        return dp;
-    }
+	private static void findWhat(int i, int j, int[] w, int[] v) {
+		if (i >= 1) {
+			if (dp[i][j] == dp[i - 1][j]) {
+				item[i] = 0;
+				findWhat(i - 1, j, w, v);
+			} else if (j - w[i] >= 0 && dp[i][j] == dp[i - 1][j - w[i]] + v[i]) {
+				item[i] = 1;
+				findWhat(i - 1, j - w[i], w, v);
+			}
+		}
+	}
 
 
-        private static void findWhat2(int i, int j, int[] w, int[] v) {
-        if (i >= 1) {
-            if (j - w[i] >= 0 && dp2[j] == dp2[j - w[i]] + v[i]) {
-                item2[i] = 1;
-                findWhat2(i - 1, j - w[i], w, v);
-            } else {
-                item2[i] = 0;
-                findWhat2(i - 1, j, w, v);
-            }
-        }
-    }
+	// 压缩空间
+	private static void solve2() {
+		int[] w = {0, 2, 4, 3, 5};
+		int[] v = {0, 3, 5, 4, 6};
+		int c = globalC;
+		dp2 = calValueImproveSpace(w, v, c);
+		int total = dp2[c];
+		System.out.println("total: " + total);
 
-    // 压缩空间
-    private static void solve2() {
-        int[] w = {0, 2, 4, 3, 5};
-        int[] v = {0, 3, 5, 4, 6};
-        int c = 8;
-        dp2 = calValueImproveSpace(w, v, c);
-        int total = dp2[c];
-        System.out.println("total: " + total);
+		System.out.println("table: ");
+		for (int i = 0; i < c + 1; i++) {
+			System.out.print(dp2[i] + " ");
+		}
+		System.out.println("");
+	}
 
-        System.out.println("table: ");
-        for (int i = 0; i < c + 1; i++) {
-            System.out.print(dp2[i] + " ");
-        }
-        System.out.println("");
-
-        // 找出解
-        System.out.println("bags: ");
-        item2 = new int[w.length];
-        findWhat2(w.length - 1, c, w, v);
-        for (int i : item2) {
-            System.out.print(i + " ");
-        }
-        System.out.println("\n");
-    }
-
-    // 压缩空间
-    private static void solve3() {
-        int[] w = {2, 4, 3, 5};
-        int[] v = {3, 5, 4, 6};
-        int c = 1000;
-        int[] item =new int[w.length];
-        int[] dp2 = calValueImproveSpace2(w, v, c,item);
-        int total = dp2[c];
-        System.out.println("total: " + total);
-
-        System.out.println("table: ");
-        for (int i = 0; i < c + 1; i++) {
-            System.out.print(dp2[i] + " ");
-        }
-        System.out.println("");
-
-        // 找出解
-        System.out.println("bags: ");
-        for (int i : item) {
-            System.out.print(i + " ");
-        }
-        System.out.println("\n");
-    }
-
-    public static void main(String[] args) {
-        solve1();
-        solve2();
-        solve3();
-    }
+	public static void main(String[] args) {
+		solve1();
+		solve2();
+	}
 }
