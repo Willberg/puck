@@ -9,13 +9,13 @@ import java.util.List;
  * @Date 2020/9/23 8:14 PM
  **/
 public class Kmp {
-	private static int[] calNext(String s, String p) {
+	private static int[] calNext(String p) {
 		int[] next = new int[p.length()];
 		int k = -1;
 		int i = 0;
 		next[0] = -1;
 		while (i < p.length() - 1) {
-			if (k == -1 || s.charAt(i) == p.charAt(k)) {
+			if (k == -1 || p.charAt(i) == p.charAt(k)) {
 				i++;
 				k++;
 				next[i] = k;
@@ -35,7 +35,7 @@ public class Kmp {
 	 */
 	private static List<Integer> kmp(String s, String p) {
 		List<Integer> list = new ArrayList<>();
-		int[] next = calNext(s, p);
+		int[] next = calNext(p);
 		int i = 0;
 		int j = 0;
 		while (i < s.length() && j < p.length()) {
