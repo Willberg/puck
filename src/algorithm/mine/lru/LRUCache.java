@@ -3,7 +3,7 @@ package algorithm.mine.lru;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LRU {
+public class LRUCache {
 	private int count;
 	private int capacity;
 	private Map<String, Node> map;
@@ -16,7 +16,7 @@ public class LRU {
 		Node post;
 	}
 
-	public LRU(int capacity) {
+	public LRUCache(int capacity) {
 		this.count = 0;
 		this.capacity = capacity;
 		this.map = new HashMap<>(capacity);
