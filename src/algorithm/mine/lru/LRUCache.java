@@ -31,7 +31,7 @@ public class LRUCache {
 		tail.pre = head;
 	}
 
-	public String get(String key) {
+	public synchronized String get(String key) {
 		Node n = map.get(key);
 		if (n == null) {
 			return "-1";
