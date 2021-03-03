@@ -4,7 +4,7 @@ import algorithm.mine.lru.LRUCache;
 
 import java.util.stream.IntStream;
 
-public class Test {
+public class TestLRU {
 	public static void main(String[] args) {
 		LRUCache lruCache = new LRUCache(16);
 		IntStream.range(0, 10).forEach(v -> {
