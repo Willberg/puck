@@ -24,6 +24,7 @@ public class ZeroOnePacket {
 		for (int i = 1; i <= w.length - 1; i++) {
 			for (int j = 1; j <= c; j++) {
 				if (j < w[i]) {
+					// 剩余容量不足以放入该物品
 					dp[i][j] = dp[i - 1][j];
 				} else {
 					dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
