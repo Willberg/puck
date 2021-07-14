@@ -57,7 +57,8 @@ public class NioSelectorServer {
 
                     // 如果有数据，把数据打印出来
                     if (read > 0) {
-                        System.out.println("接受到消息： " + new String(byteBuffer.array()));
+                        String s = new String(byteBuffer.array());
+                        System.out.println("接受到消息： " + s.substring(0, s.indexOf('\0')));
                     } else if (read == -1) {
                         System.out.println("客户端断开连接，关闭socket");
                         socketChannel.close();

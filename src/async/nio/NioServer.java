@@ -33,7 +33,8 @@ public class NioServer {
                 int read = o.read(byteBuffer);
                 if (read > 0) {
                     // 如果有数据
-                    System.out.println("接受到的数据： " + new String(byteBuffer.array()));
+                    String s = new String(byteBuffer.array());
+                    System.out.println("接受到的数据： " + s.substring(0, s.indexOf('\0')));
                 } else if (read == -1) {
                     // 客户端断开
                     iterable.remove();
