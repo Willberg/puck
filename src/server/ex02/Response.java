@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.Locale;
 
 public class Response implements ServletResponse {
-	private static String WEB_ROOT = System.getProperty("user.dir") + File.separator + Constants.WEB_ROOT;
+	private static String STATIC_WEB_ROOT = System.getProperty("user.dir") + File.separator + Constants.WEB_ROOT;
 	private static final int BUFFER_SIZE = 1024;
 	private Request request;
 	private OutputStream output;
@@ -25,7 +25,7 @@ public class Response implements ServletResponse {
 		FileInputStream fis = null;
 
 		try {
-			File file = new File(WEB_ROOT, request.getUri());
+			File file = new File(STATIC_WEB_ROOT, request.getUri());
 			if (file.exists()) {
 				fis = new FileInputStream(file);
 				String res = "HTTP/1.1 200 OK\r\n\r\n";
