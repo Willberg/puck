@@ -7,15 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/jars/cglib-nodep-3.3.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="javax.servlet-api-4.0.1" level="project" />
+    <orderEntry type="library" name="imap-1.5.6" level="project" />
+    <orderEntry type="library" name="javax.mail-1.6.0" level="project" />
+    <orderEntry type="library" name="cglib-nodep-3.3.0" level="project" />
   </component>
 </module>
