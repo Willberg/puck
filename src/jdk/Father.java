@@ -1,15 +1,31 @@
 package jdk;
 
 public class Father {
-	protected void print() {
-		System.out.println("This is Father");
-	}
+    private static String FATHER_STATIC = "father static";
+    private String sonMethod = getFatherMethod();
 
-	protected void f() {
-		System.out.println("father method");
-	}
+    static {
+        System.out.println("father static block");
+    }
 
-	protected void test() {
-		print();
-	}
+    public Father() {
+        System.out.println("father construct");
+    }
+
+    private String getFatherMethod() {
+        System.out.println("Father normal method");
+        return "Father normal method";
+    }
+
+    protected void print() {
+        System.out.println("This is Father");
+    }
+
+    protected void f() {
+        System.out.println("father method");
+    }
+
+    protected void test() {
+        print();
+    }
 }
