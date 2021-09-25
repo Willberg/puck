@@ -1,4 +1,4 @@
-package algorithm.mine.sort;
+package algorithm.mine.sort.quick;
 
 import java.util.ArrayList;
 import java.util.List;
