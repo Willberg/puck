@@ -77,10 +77,12 @@ public class MySort {
     /**
      * shell排序
      * 通过对数组依次按gap分组进行插入排序使数组有序, gap初值为数组长度的一半,直到为1
+     * gap是每组元素之间的间隔值,最开始间隔为原数组的一半,因此每组元素只有两个
      */
     public void shellSort() {
         for (int gap = arr.length / 2; gap >= 1; gap /= 2) {
             for (int i = gap; i < arr.length; i++) {
+                // 从gap开始的每一个元素都要进行插入排序
                 for (int j = i; j - gap >= 0; j -= gap) {
                     if (arr[j] < arr[j - gap]) {
                         swap(j, j - gap);
