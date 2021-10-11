@@ -38,19 +38,26 @@ public class TestString {
         }
         String beginWord = "hit";
         String endWord = "cog";
-        t.findLadders(beginWord, endWord, wordList);
+        List<List<String>> ansList = t.findLadders(beginWord, endWord, wordList);
+        for (List<String> list : ansList) {
+            for (String s : list) {
+                System.out.print(s + "->");
+            }
+            System.out.println("");
+        }
     }
 
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-        if (!wordList.contains(endWord)) {
-            return null;
-        }
-
-        wordList.remove(endWord);
+        List<List<String>> ansList = new LinkedList<>();
         Set<String> dict = new HashSet<>();
         for (String s : wordList) {
             dict.add(s);
         }
+        if (!dict.contains(endWord)) {
+            return ansList;
+        }
+        dict.remove(beginWord);
+        dict.remove(endWord);
 
         Queue<String> q1 = new ArrayDeque<>();
         Queue<String> q2 = new ArrayDeque<>();
@@ -126,11 +133,10 @@ public class TestString {
         }
 
         if (!found) {
-            return null;
+            return ansList;
         }
 
         // 回溯输出路径
-        List<List<String>> ansList = new LinkedList<>();
         List<String> path = new LinkedList<>();
         path.add(beginWord);
         backtracking(next, ansList, path, beginWord, endWord);
@@ -141,6 +147,10 @@ public class TestString {
                               List<String> path, String beginWord, String endWord) {
         if (beginWord.equals(endWord)) {
             ansList.add(new LinkedList<>(path));
+            return;
+        }
+
+        if (next.get(beginWord) == null) {
             return;
         }
 
