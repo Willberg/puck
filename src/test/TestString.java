@@ -1,6 +1,9 @@
 package test;
 
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class TestString {
     private void testStr() {
@@ -20,17 +23,30 @@ public class TestString {
         System.out.println(e == g);
 
         System.out.println(a.equals(d));
+    }
 
-        Queue<Integer[]> q = new ArrayDeque<>();
-        Queue<String> q1 = new ArrayDeque<>();
-        q1.add("1");
-        Stack<Integer> s = new Stack<>();
-        Set<Integer> set = new HashSet<>();
-        List<String> list = new ArrayList<>();
+    private void testThreadPollExecutor() {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 10, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
+        executor.execute(() -> {
+            try {
+                // sleep 10s
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread());
+        });
+        executor.shutdown();
     }
 
     public static void main(String[] args) {
         TestString t = new TestString();
+        t.testFindLadders(t);
+        t.testStr();
+        t.testThreadPollExecutor();
+    }
+
+    private void testFindLadders(TestString t) {
         String[] arr = new String[]{"hot", "dot", "dog", "lot", "log", "cog"};
         List<String> wordList = new ArrayList<>();
         for (String s : arr) {
