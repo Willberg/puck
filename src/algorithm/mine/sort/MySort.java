@@ -7,6 +7,7 @@ import java.util.Random;
 public class MySort {
     private int[] arr;
     private int[] oriArr;
+    private final Random random = new Random();
 
     public MySort(int m, int rand, int n) {
         this.oriArr = generateRandArray(m, rand, n);
@@ -123,14 +124,16 @@ public class MySort {
     }
 
     /**
-     * 快速排序
-     * 取数组第一个元素作为基准,将小于基准的值放在左边,大于基准的值放在右边,然后将左右两边的元素递归,进行同样的处理
+     * 随机快速排序(优化)
+     * 随机取数组中一个元素作为基准,将小于基准的值放在左边,大于基准的值放在右边,然后将左右两边的元素递归,进行同样的处理
      */
     public void quickSort(int l, int r) {
         if (l >= r) {
             return;
         }
 
+        int pos = random.nextInt(r - l);
+        swap(l, l + pos);
         int pivot = arr[l];
         int i = l, j = r - 1;
         while (i < j) {
