@@ -160,29 +160,39 @@ public class MySort {
      */
     public void heapSort() {
         int len = arr.length;
-        toHeap(len);
+        buildMaxHeap(len);
 
         while (len > 0) {
             swap(0, len - 1);
             len--;
-            toHeap(len);
+            toMaxHeap(0, len);
         }
     }
 
-    // 堆化
-    private void toHeap(int len) {
-        // 取树结构的父节点
-        int i = (len >> 1) - 1;
-        while (i >= 0) {
-            int j = 2 * i + 1;
-            if (j + 1 < len && arr[j] < arr[j + 1]) {
-                j++;
+    private void buildMaxHeap(int len) {
+        for (int i = len >> 1; i >= 0; i--) {
+            toMaxHeap(i, len);
+        }
+    }
+
+    // 大顶堆化
+    private void toMaxHeap(int p, int len) {
+        while (p < len) {
+            int large = p;
+            // 取树结构的左儿子节点
+            int l = 2 * p + 1;
+            if (l < len && arr[l] > arr[large]) {
+                large = l;
             }
 
-            if (arr[j] > arr[i]) {
-                swap(i, j);
+            if (l + 1 < len && arr[l + 1] > arr[large]) {
+                large = l + 1;
             }
-            i--;
+            if (p == large) {
+                break;
+            }
+            swap(p, large);
+            p = large;
         }
     }
 
